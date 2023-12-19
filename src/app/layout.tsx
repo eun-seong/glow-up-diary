@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+// import dayjs from 'dayjs'
+// import 'dayjs/locale/ko'
 import clsx from 'clsx'
 
 import '@/styles/globals.css'
+
+// dayjs.locale('ko')
 
 const Pretendard = localFont({
   src: '../assets/fonts/Pretendard/PretendardVariable.woff2',
