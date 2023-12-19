@@ -19,7 +19,9 @@ export default function Calender({ date: current }: Props) {
 
   return (
     <div
-      className={clsx('w-fit px-5 py-5 bg-[#151515] text-white rounded-3xl')}
+      className={clsx(
+        'w-fit h-fit min-w-fit max-h-fit px-5 py-5 bg-[#151515] text-white rounded-3xl',
+      )}
     >
       <div className="flex pl-3 pb-2 justify-between items-center">
         <div className="font-semibold text-lg">
