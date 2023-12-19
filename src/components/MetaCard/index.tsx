@@ -17,7 +17,7 @@ export default function MetaCard({ markdownContent }: Props) {
           <div className="font-bold text-xl pb-2">{metadata?.date}</div>
           <ul>
             {metadata?.today
-              ?.split(',')
+              ?.split('|')
               .filter(Boolean)
               .map((text, idx) => (
                 <li key={idx}>{text.trim()}</li>
