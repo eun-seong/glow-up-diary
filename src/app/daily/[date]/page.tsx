@@ -17,8 +17,7 @@ export default function Page({ params }: Props) {
 
   const fullPath = path.join(
     process.cwd(),
-    '/posts',
-    `/daily/${currentDate}.md`,
+    `/posts/daily/${year}/${currentDate}.md`,
   )
 
   try {
