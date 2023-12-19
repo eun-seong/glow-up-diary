@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 import Calender from '@/components/Calender'
 
 export default function DailyLayout({
@@ -10,11 +12,16 @@ export default function DailyLayout({
   }
 }) {
   return (
-    <div className="flex min-h-screen p-24 bg-black text-white">
-      <div>
+    <div className="min-h-screen p-24 bg-black w-full">
+      <div
+        className={clsx(
+          'flex text-white mx-auto max-w-[1100px] gap-20',
+          'max-lg:flex-col max-lg:gap-10',
+        )}
+      >
         <Calender date={params.date} />
+        <div className={clsx('', 'max-lg:p-0')}>{children}</div>
       </div>
-      <div className="flex-1 px-10">{children}</div>
     </div>
   )
 }

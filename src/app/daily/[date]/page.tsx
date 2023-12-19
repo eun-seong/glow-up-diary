@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import * as marked from 'marked'
-import Calender from '@/components/Calender'
-import dayjs from 'dayjs'
+
+import MetaCard from '@/components/MetaCard'
 
 interface Props {
   params: {
@@ -20,6 +20,7 @@ export default function Page({ params }: Props) {
     '/posts',
     `/daily/${currentDate}.md`,
   )
+
   try {
     markdownContent = fs.readFileSync(fullPath, 'utf8')
   } catch {}
@@ -27,19 +28,14 @@ export default function Page({ params }: Props) {
   function preprocess(markdown: string) {
     const [first, second = '', ...contents] = markdown.split('---\n')
     if (!first && second) {
-      const metadata = second
-        .trim()
-        .split('\n')
-        .map((meta) => meta.split(': '))
-        .reduce((res, [key, value]) => ({ ...res, [key]: value }), {})
-      console.log(metadata)
       return contents.join('---\n')
     }
     return markdown
   }
 
   return (
-    <div>
+    <div className="prose dark:prose-invert w-full">
+      <MetaCard markdownContent={markdownContent} />
       <div
         dangerouslySetInnerHTML={{
           __html: marked.use({ hooks: { preprocess } }).parse(markdownContent),
