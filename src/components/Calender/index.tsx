@@ -8,9 +8,10 @@ import { DAYS } from '@/constants/days'
 
 interface Props {
   date: string
+  dailyDiaries: Record<number, string[]>
 }
 
-export default function Calender({ date: current }: Props) {
+export default function Calender({ date: current, dailyDiaries }: Props) {
   const currentDate = dayjs(current)
   const [calendarDate, setCalendarDate] = useState(currentDate)
 
@@ -67,6 +68,7 @@ export default function Calender({ date: current }: Props) {
               <Date
                 date={idx + 1}
                 active={date === currentDate.format('YYYY-MM-DD')}
+                available={dailyDiaries[calendarDate.year()].includes(date)}
               />
             </Link>
           )
@@ -79,12 +81,17 @@ export default function Calender({ date: current }: Props) {
 interface DateProps {
   date: number
   active?: boolean
+  available?: boolean
 }
-function Date({ date, active = false }: DateProps) {
+function Date({ date, active = false, available = false }: DateProps) {
   return (
     <div
       className={clsx(
-        active ? 'bg-[#ffff3c] text-[#151515]' : 'hover:bg-[#212121]',
+        active
+          ? 'bg-[#BE5050] text-[#F4F4F4]'
+          : available
+          ? 'bg-[#453A3A] text-[#F4F4F499]'
+          : 'hover:bg-[#212121] text-[#F4F4F499]',
         'flex rounded-full h-10 w-10 cursor-pointer justify-center items-center text-sm',
       )}
     >
