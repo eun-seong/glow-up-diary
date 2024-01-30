@@ -1,4 +1,5 @@
-import { PropsWithChildren } from 'react'
+'use client'
+import { PropsWithChildren, useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
@@ -10,12 +11,20 @@ interface Props {
 }
 
 export default function Calender({ date: current }: Props) {
-  const [year, month, date] = current.split('-')
   const currentDate = dayjs(current)
+  const [calendarDate, setCalendarDate] = useState(currentDate)
 
-  const startOfMonthDate = currentDate.startOf('month')
+  const startOfMonthDate = calendarDate.startOf('month')
   const endOfMonthDate = currentDate.endOf('month')
   const startOfDay = startOfMonthDate.format('ddd')
+
+  const handlePrevMonthClick = () => {
+    setCalendarDate((cur) => cur.subtract(1, 'month'))
+  }
+
+  const handleNextMonthClick = () => {
+    setCalendarDate((cur) => cur.add(1, 'month'))
+  }
 
   return (
     <div
@@ -25,13 +34,19 @@ export default function Calender({ date: current }: Props) {
     >
       <div className="flex pl-3 pb-2 justify-between items-center">
         <div className="font-semibold text-lg">
-          {year} {currentDate.format('MMMM')}
+          {calendarDate.year()} {calendarDate.format('MMMM')}
         </div>
         <div className="flex gap-2">
-          <div className="flex rounded-full h-10 w-10 hover:bg-[#212121] cursor-pointer justify-center items-center">
+          <div
+            className="flex rounded-full h-10 w-10 hover:bg-[#212121] cursor-pointer justify-center items-center"
+            onClick={handlePrevMonthClick}
+          >
             {'<'}
           </div>
-          <div className="flex rounded-full h-10 w-10 hover:bg-[#212121] cursor-pointer justify-center items-center">
+          <div
+            className="flex rounded-full h-10 w-10 hover:bg-[#212121] cursor-pointer justify-center items-center"
+            onClick={handleNextMonthClick}
+          >
             {'>'}
           </div>
         </div>
@@ -43,11 +58,19 @@ export default function Calender({ date: current }: Props) {
         {Array.from({ length: startOfMonthDate.day() }).map((_, idx) => (
           <div key={idx}></div>
         ))}
-        {Array.from({ length: currentDate.daysInMonth() }).map((_, idx) => (
-          <Link key={idx} href={`/daily/${year}-${month}-${idx + 1}`}>
-            <Date date={idx + 1} active={currentDate.date() == idx + 1} />
-          </Link>
-        ))}
+        {Array.from({ length: calendarDate.daysInMonth() }).map((_, idx) => {
+          const date = dayjs(
+            `${calendarDate.year()}-${calendarDate.month() + 1}-${idx + 1}`,
+          ).format('YYYY-MM-DD')
+          return (
+            <Link key={idx} href={`/daily/${date}`}>
+              <Date
+                date={idx + 1}
+                active={date === currentDate.format('YYYY-MM-DD')}
+              />
+            </Link>
+          )
+        })}
       </div>
     </div>
   )
