@@ -5,9 +5,9 @@ import path from 'path'
 import Calender from '@/components/Calender'
 
 export default async function DailyLayout({
-  children,
-  params,
-}: {
+                                            children,
+                                            params,
+                                          }: {
   children: React.ReactNode
   params: {
     date: string
@@ -39,9 +39,9 @@ async function getDailyDiaryNames() {
         encoding: 'utf8',
         recursive: true,
       })
-      .filter((name) => name.match(/^\d{4}\/\d{4}\-\d{2}\-\d{2}\.md$/))
+      .filter((name) => name.match(/^\d{4}\/\d{1,2}\/\d{4}\-\d{2}\-\d{2}\.md$/))
       .reduce((res, name) => {
-        const [year, fileName] = name.split('/')
+        const [year, month, fileName] = name.split('/')
         const [date] = fileName.split('.')
         return {
           ...res,
@@ -49,7 +49,8 @@ async function getDailyDiaryNames() {
         }
       }, {} as Record<number, string[]>)
     return files
-  } catch {}
+  } catch {
+  }
 
   return {}
 }
