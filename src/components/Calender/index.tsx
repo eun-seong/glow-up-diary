@@ -12,7 +12,6 @@ interface Props {
 }
 
 export default function Calender({ date: current, dailyDiaries }: Props) {
-  console.log(dailyDiaries)
   const currentDate = dayjs(current)
   const [calendarDate, setCalendarDate] = useState(currentDate)
 
