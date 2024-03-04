@@ -24,17 +24,17 @@ list.add(1);
 
 `ArrayList` 객체를 생성할 때 `ArrayList`는 메모리를 미리 할당하여 가지고 있을까요?
 `ArrayList` 생성자 코드를 살펴봅니다.
-![[Pasted image 20240105184719.png]]
+![[./images/Pasted image 20240105184719.png]]
 
 설명은 초기 capacity가 10인 빈 배열로 구성된다고 작성되어 있습니다. 그리고 `elementData` 라는 멤버필드에 상수 객체로 초기화하고 있습니다. 이 상수가 아마 빈 배열이겠네요.
 
 `elementData`를 살펴볼게요.
-![[Pasted image 20240105184847.png]]
+![[./images/Pasted image 20240105184847.png]]
 설명을 보면, `elementData`는 `ArrayList`의 버퍼 배열이라고 합니다. 
 실제로 타입은 `Object[]`로 모든 객체를 담을 수 있는 순수 배열이네요. `ArrayList` 내부에서는 이 `elementData` 순수 배열을 통해서 원소를 담고 있습니다. 그리고 `ArrayList`의 capacity는 이 배열의 크기로 정해집니다. 
 
 그럼 `DEFAULTCAPACITY_EMPTY_ELEMENTDATA`의 타입도 당연히 `Object[]`이겠네요.
-![[Pasted image 20240105185225.png]]
+![[./images/Pasted image 20240105185225.png]]
 
 예상대로 타입이 `elementData`와 동일합니다. 이 객체는 빈 배열의 공유 인스턴스입니다.
 
@@ -47,14 +47,14 @@ list.add(1);
 그럼 리스트가 어느정도로 차야 확장이 되고, 얼만큼 확장될까요?
 
 `add(1)` 메소드 내부 코드를 보겠습니다.
-![[Pasted image 20240105190028.png]]
+![[./images/Pasted image 20240105190028.png]]
 
 `add(1)`을 호출하면 위 메소드가 호출될 겁니다.
 이 메소드 내부에서 `private add()`메소드를 호출하고 있네요. 파라미터로는 추가할 데이터, `elementData`와 `size`를 넘기고 있습니다.
 `size`는 `ArrayList` 인스턴스의 크기입니다. `list.size()`를 호출하면 반환받는 숫자이죠.
 
 그럼 내부 `add` 메소드를 봅시다.
-![[Pasted image 20240105190231.png]]
+![[./images/Pasted image 20240105190231.png]]
 
 전달받은 크기 `size`가 `elementData`의 크기와 같을 경우에 `grow()`를 호출하고 있어요.
 `grow()` 는 아마 메모리를 확장하는 메소드이겠죠.
@@ -70,10 +70,10 @@ list.add(1);
 `add` 메소드가 한 번이라도 호출될 경우 실제 원소를 담을 수 있는 메모리가 할당될 것입니다.
 
 `grow()` 메소드 내부 코드를 봅니다.
-![[Pasted image 20240105191207.png]]
+![[./images/Pasted image 20240105191207.png]]
 
 정수를 파라미터로 받는 메소드가 하나 더 있네요.
-![[Pasted image 20240105191250.png]]
+![[./images/Pasted image 20240105191250.png]]
 
 파라미터로 원하는 최소 capacity를 받고 있어요.
 원소를 하나만 추가하는 메소드이니  `size + 1`를 전달 받았습니다.
@@ -87,7 +87,7 @@ list.add(1);
 그럼 원소 11개를 넣는 시점에서 메모리 확장이 발생하겠네요. 메모리 확장은 얼만큼 될까요?
 
 `grow()` 메소드에서 `if` 문에 해당하는 내용입니다.
-![[Pasted image 20240105191250.png]]
+![[./images/Pasted image 20240105191250.png]]
 `add(1)`을 11번째 호출했다면, `oldCapacity`가 현재 10일 것입니다.
 
 이 때 확장할 배열의 길이를 계산하고, 이 길이만큼의 새로운 배열을 만들어 기존 배열을 복사합니다.

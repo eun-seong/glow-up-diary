@@ -11,7 +11,7 @@ title: 남의위키 의존성 그래프를 그려보기
 심지어 User 도메인은 그리지도 않았는데 말이다...
 
 최대한 보기 좋고 예쁜 그래프를 그리려다가 Dashboard 그릴 때부터 포기했다.
-![[Pasted image 20240304230450.png]]
+![[./images/Pasted image 20240304230450.png]]
 
 파랑 : Repository
 빨강 : Service
