@@ -6,6 +6,7 @@ title: 남의위키 의존성 그래프를 그려보기
 ## 의존성 그래프 그리기
 
 조영호님의 우아한 객체지향 세미나를 듣고, 남의위키의 그래프를 의존성 그래프를 그려보았다.
+피그잼으로 직접 확인 : [FigJam Board Link](https://www.figma.com/file/cHyXPGQt9F8ylOfA8yReKA/%EB%82%A8%EC%9D%98%EC%9C%84%ED%82%A4-%EC%9D%98%EC%A1%B4%EC%84%B1-%EA%B7%B8%EB%9E%98%ED%94%84?type=whiteboard&node-id=0%3A1&t=IoGPNS0GwPCLLthF-1)
 
 결과는 대충격 🤯
 
@@ -13,7 +14,7 @@ title: 남의위키 의존성 그래프를 그려보기
 심지어 User 도메인은 그리지도 않았는데 말이다...
 
 최대한 보기 좋고 예쁜 그래프를 그리려다가 Dashboard 그릴 때부터 포기했다.
-![[./images/Pasted image 20240304230450.png]]
+![[Pasted image 20240307035419.png]]
 
 파랑 : Repository
 빨강 : Service
@@ -199,7 +200,11 @@ public List<DashboardComponent> getUserDashboards() {
 ## 리팩토링으로 얻은 것
 
 리팩토링 후의 의존성 그래프는 확실히 간단해졌다.
-![[./images/Pasted image 20240307032705.png]]
+![[Pasted image 20240307035403.png]]
+
+귀속되는 클래스끼리 묶은 컴팩트 버전은 더 간단하다.
+![[Pasted image 20240307035319.png]]
+
 
 이미 존재하는 DashboareStatisticsType으로 새로운 대시보드 타입이 하나가 추가되면
 
@@ -220,3 +225,9 @@ PopulationStatistic도 비슷하다.
 변경된 후로는 역시 DashboardType에 타입 추가만 해주면 된다.
 
 변경되는 파일은 `DashboardType.java` 하나이게 된 점이 이 리팩토링을 통해 얻은 가장 큰 소득이 아닐까 싶다.
+
+---
+
+우아한 객체지향 세미나를 보고 적용해본 것인데, 그래프를 그려보니 눈에 확 들어와서 체감하기 좋았다.
+이렇게 꼬인 것들을 풀어내고 각자의 역할에 충실한 코드와 아키텍쳐를 유지하려고 노력하하는 것이, 나중에 크기가 커졌을 때 레포를 분리하고 MSA를 적용하기 위한 준비라는 생각이 든다.
+
