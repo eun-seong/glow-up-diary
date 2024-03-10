@@ -30,7 +30,7 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
   return (
     <div
       className={clsx(
-        'w-fit h-fit min-w-fit max-h-fit px-5 py-5 bg-[#151515] text-white rounded-3xl',
+        'w-fit h-fit min-w-fit max-h-fit px-5 py-5 bg-white text-grey80 rounded-3xl',
       )}
     >
       <div className="flex pl-3 pb-2 justify-between items-center">
@@ -39,13 +39,13 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
         </div>
         <div className="flex gap-2">
           <div
-            className="flex rounded-full h-10 w-10 hover:bg-[#212121] cursor-pointer justify-center items-center"
+            className="flex rounded-full h-10 w-10 text-black hover:bg-grey20 cursor-pointer justify-center items-center"
             onClick={handlePrevMonthClick}
           >
             {'<'}
           </div>
           <div
-            className="flex rounded-full h-10 w-10 hover:bg-[#212121] cursor-pointer justify-center items-center"
+            className="flex rounded-full h-10 w-10 text-black hover:bg-grey20 cursor-pointer justify-center items-center"
             onClick={handleNextMonthClick}
           >
             {'>'}
@@ -88,10 +88,10 @@ function Date({ date, active = false, available = false }: DateProps) {
     <div
       className={clsx(
         active
-          ? 'bg-[#BE5050] text-[#F4F4F4]'
+          ? 'bg-blue text-white'
           : available
-          ? 'bg-[#453A3A] text-[#F4F4F499]'
-          : 'hover:bg-[#212121] text-[#F4F4F499]',
+          ? 'bg-white text-blue font-bold hover:bg-white hover:border hover:border-blue'
+          : 'hover:bg-white hover:border hover:border-blue text-grey70',
         'flex rounded-full h-10 w-10 cursor-pointer justify-center items-center text-sm',
       )}
     >

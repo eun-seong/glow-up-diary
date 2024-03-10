@@ -33,7 +33,7 @@ export default function Page({ params }: Props) {
   }
 
   return (
-    <div className="prose dark:prose-invert w-full">
+    <div className="prose w-full">
       <MetaCard markdownContent={markdownContent} />
       <div
         dangerouslySetInnerHTML={{

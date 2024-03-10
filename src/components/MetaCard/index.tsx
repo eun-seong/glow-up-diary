@@ -9,12 +9,12 @@ export default function MetaCard({ markdownContent }: Props) {
   const metadata = getMetaData<DailyReportMetaData>(markdownContent)
 
   return (
-    <div
-      className={clsx('w-full px-8 py-5 bg-[#151515] text-white rounded-3xl')}
-    >
+    <div className={clsx('w-full px-8 py-5 bg-white text-black rounded-3xl')}>
       {metadata ? (
         <>
-          <div className="font-bold text-xl pb-2">{metadata?.date}</div>
+          <div className="font-bold text-xl pb-2 text-black">
+            {metadata?.date}
+          </div>
           <ul>
             {metadata?.today
               ?.split('|')

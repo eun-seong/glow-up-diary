@@ -5,9 +5,9 @@ import path from 'path'
 import Calender from '@/components/Calender'
 
 export default async function DailyLayout({
-                                            children,
-                                            params,
-                                          }: {
+  children,
+  params,
+}: {
   children: React.ReactNode
   params: {
     date: string
@@ -16,10 +16,10 @@ export default async function DailyLayout({
   const dailyDiaries = await getDailyDiaryNames()
 
   return (
-    <div className="min-h-screen p-24 bg-black w-full">
+    <div className="min-h-screen p-24 bg-grey30 w-full">
       <div
         className={clsx(
-          'flex text-white mx-auto max-w-[1100px] gap-20',
+          'flex text-black mx-auto max-w-[1100px] gap-20',
           'max-lg:flex-col max-lg:gap-10',
         )}
       >
@@ -49,8 +49,7 @@ async function getDailyDiaryNames() {
         }
       }, {} as Record<number, string[]>)
     return files
-  } catch {
-  }
+  } catch {}
 
   return {}
 }
