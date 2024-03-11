@@ -15,7 +15,7 @@ const Pretendard = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Glow Up Diary',
+  title: 'dev.eun',
   description: '개발성장일기',
 }
 
