@@ -11,6 +11,8 @@ interface Props {
   dailyDiaries: Record<number, string[]>
 }
 
+const CALENDER_HOVER_STYLE = 'hover:bg-lightblue hover:border hover:border-blue'
+
 export default function Calender({ date: current, dailyDiaries }: Props) {
   const currentDate = dayjs(current)
   const [calendarDate, setCalendarDate] = useState(currentDate)
@@ -39,13 +41,13 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
         </div>
         <div className="flex gap-2">
           <div
-            className="flex rounded-full h-10 w-10 text-black hover:bg-grey20 cursor-pointer justify-center items-center"
+            className="flex rounded-full h-10 w-10 text-grey80 hover:bg-grey20 cursor-pointer justify-center items-center"
             onClick={handlePrevMonthClick}
           >
             {'<'}
           </div>
           <div
-            className="flex rounded-full h-10 w-10 text-black hover:bg-grey20 cursor-pointer justify-center items-center"
+            className="flex rounded-full h-10 w-10 text-grey80 hover:bg-grey20 cursor-pointer justify-center items-center"
             onClick={handleNextMonthClick}
           >
             {'>'}
@@ -90,8 +92,9 @@ function Date({ date, active = false, available = false }: DateProps) {
         active
           ? 'bg-blue text-white'
           : available
-          ? 'bg-white text-blue font-bold hover:bg-white hover:border hover:border-blue'
-          : 'hover:bg-white hover:border hover:border-blue text-grey70',
+          ? 'bg-white text-blue font-bold hover:border-blue ' +
+            CALENDER_HOVER_STYLE
+          : 'text-grey70 ' + CALENDER_HOVER_STYLE,
         'flex rounded-full h-10 w-10 cursor-pointer justify-center items-center text-sm',
       )}
     >
