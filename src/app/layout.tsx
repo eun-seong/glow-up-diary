@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import clsx from 'clsx'
 
 import '@/styles/globals.css'
+import Header from '@/components/Header'
 
 // dayjs.locale('ko')
 
@@ -25,7 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={clsx(Pretendard.className)}>{children}</body>
+      <body className={clsx(Pretendard.className, 'min-h-screen w-full')}>
+        <Header />
+        <div className="mx-auto max-w-post py-12 px-7">{children}</div>
+      </body>
     </html>
   )
 }

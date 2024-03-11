@@ -16,16 +16,9 @@ export default async function DailyLayout({
   const dailyDiaries = await getDailyDiaryNames()
 
   return (
-    <div className="min-h-screen p-24 bg-grey30 w-full">
-      <div
-        className={clsx(
-          'flex text-black mx-auto max-w-[1100px] gap-20',
-          'max-lg:flex-col max-lg:gap-10',
-        )}
-      >
-        <Calender date={params.date} dailyDiaries={dailyDiaries} />
-        <div className={clsx('', 'max-lg:p-0')}>{children}</div>
-      </div>
+    <div className={clsx('flex-col text-black mx-auto max-w-post space-y-10')}>
+      <Calender date={params.date} dailyDiaries={dailyDiaries} />
+      <div>{children}</div>
     </div>
   )
 }

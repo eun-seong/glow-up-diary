@@ -30,21 +30,23 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
   }
 
   return (
-    <div
-      className={clsx(
-        'w-fit h-fit min-w-fit max-h-fit px-5 py-5 bg-white text-grey80 rounded-3xl',
-      )}
-    >
-      <div className="flex pl-3 pb-2 justify-between items-center">
-        <div className="font-semibold text-lg">
-          {calendarDate.year()} {calendarDate.format('MMMM')}
-        </div>
-        <div className="flex gap-2">
-          <div
-            className="flex rounded-full h-10 w-10 text-grey80 hover:bg-grey20 cursor-pointer justify-center items-center"
-            onClick={handlePrevMonthClick}
-          >
-            {'<'}
+    <div className="w-full space-y-1">
+      <div
+        className={clsx(
+          'w-fit h-fit min-w-fit max-h-fit p-5 bg-white text-grey80 rounded-3xl',
+        )}
+      >
+        <div className="grid pl-3 pb-2 justify-center items-center gap-2 grid-cols-3">
+          <div className="flex justify-end items-center">
+            <div
+              className="flex rounded-full h-10 w-10 text-grey80 hover:bg-grey20 cursor-pointer justify-center items-center"
+              onClick={handlePrevMonthClick}
+            >
+              {'<'}
+            </div>
+          </div>
+          <div className="font-semibold text-lg text-center">
+            {calendarDate.year()} {calendarDate.format('MMMM')}
           </div>
           <div
             className="flex rounded-full h-10 w-10 text-grey80 hover:bg-grey20 cursor-pointer justify-center items-center"
@@ -53,28 +55,23 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
             {'>'}
           </div>
         </div>
-      </div>
-      <div className={clsx('grid grid-cols-7 gap-1')}>
-        {Array.from({ length: 7 }).map((_, idx) => (
-          <Days key={idx}>{DAYS[idx]}</Days>
-        ))}
-        {Array.from({ length: startOfMonthDate.day() }).map((_, idx) => (
-          <div key={idx}></div>
-        ))}
-        {Array.from({ length: calendarDate.daysInMonth() }).map((_, idx) => {
-          const date = dayjs(
-            `${calendarDate.year()}-${calendarDate.month() + 1}-${idx + 1}`,
-          ).format('YYYY-MM-DD')
-          return (
-            <Link key={idx} href={`/daily/${date}`}>
-              <Date
-                date={idx + 1}
-                active={date === currentDate.format('YYYY-MM-DD')}
-                available={dailyDiaries[calendarDate.year()].includes(date)}
-              />
-            </Link>
-          )
-        })}
+
+        <div className={clsx('flex flex-wrap gap-1')}>
+          {Array.from({ length: calendarDate.daysInMonth() }).map((_, idx) => {
+            const date = dayjs(
+              `${calendarDate.year()}-${calendarDate.month() + 1}-${idx + 1}`,
+            ).format('YYYY-MM-DD')
+            return (
+              <Link key={idx} href={`/daily/${date}`}>
+                <Date
+                  date={idx + 1}
+                  active={date === currentDate.format('YYYY-MM-DD')}
+                  available={dailyDiaries[calendarDate.year()].includes(date)}
+                />
+              </Link>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

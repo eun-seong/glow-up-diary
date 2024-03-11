@@ -3,6 +3,7 @@ import path from 'path'
 import * as marked from 'marked'
 
 import MetaCard from '@/components/MetaCard'
+import Post from '@/components/Post'
 
 interface Props {
   params: {
@@ -33,13 +34,11 @@ export default function Page({ params }: Props) {
   }
 
   return (
-    <div className="prose w-full">
+    <div>
       <MetaCard markdownContent={markdownContent} />
-      <div
-        dangerouslySetInnerHTML={{
-          __html: marked.use({ hooks: { preprocess } }).parse(markdownContent),
-        }}
-      ></div>
+      <Post
+        html={marked.use({ hooks: { preprocess } }).parse(markdownContent)}
+      />
     </div>
   )
 }

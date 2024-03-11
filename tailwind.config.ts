@@ -8,6 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        post: '700px',
+        header: '1140px',
+      },
+      width: {
+        post: '700px',
+      },
+      height: {
+        header: '60px',
+      },
       colors: {
         white: '#FFFFFF',
         black: '#19181D',
@@ -17,6 +27,7 @@ const config: Config = {
         grey10: '#F9F9FD',
         grey20: '#F8F9FD',
         grey30: '#F4F5F7',
+        grey60: '#D8D8D8',
         grey70: '#B1B9C4',
         grey80: '#718397',
 
