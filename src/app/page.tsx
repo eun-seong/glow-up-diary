@@ -43,7 +43,7 @@ function ContactCard() {
           />
         </svg>
       </Svg>
-      <Svg href="https://www.linkedin.com/in/eunseong-lee-05ba1b283">
+      <Svg href="https://www.linkedin.com/in/eunseong-lee">
         <svg
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
