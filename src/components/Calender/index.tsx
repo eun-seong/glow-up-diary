@@ -92,7 +92,7 @@ function Date({ date, active = false, available = false }: DateProps) {
           ? 'bg-white text-blue font-bold hover:border-blue ' +
             CALENDER_HOVER_STYLE
           : 'text-grey70 ' + CALENDER_HOVER_STYLE,
-        'flex rounded-full h-10 w-10 cursor-pointer justify-center items-center text-sm',
+        'flex rounded-full h-10 w-10 cursor-pointer justify-center items-center text-sm transition-all border border-white border-opacity-0',
       )}
     >
       {date}
