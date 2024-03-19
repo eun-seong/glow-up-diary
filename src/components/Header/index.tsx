@@ -19,11 +19,6 @@ const linkes = [
     hover: '🔥',
     href: `/posts`,
   },
-  {
-    title: 'About',
-    hover: '😎',
-    href: `/about`,
-  },
 ]
 
 export default function Header() {
@@ -52,7 +47,12 @@ export default function Header() {
 
   return (
     <header className="w-full h-header border-b border-b-grey60 text-grey80">
-      <div className="h-full min-h-header flex justify-between max-w-header px-11 items-center mx-auto">
+      <div
+        className={clsx(
+          'h-full min-h-header max-w-header',
+          'flex justify-between items-center mx-auto px-1 md:px-11 sm:px-3',
+        )}
+      >
         <Link
           href={'/'}
           className={clsx(
@@ -61,12 +61,16 @@ export default function Header() {
         >
           DEV.EUN
         </Link>
-        <ul className="flex gap-10 items-center">
+        <ul className="flex md:gap-10 items-center gap-4">
           {linkes.map(({ href, title, hover }, idx) => (
             <Link
               key={href}
               href={href}
-              className={clsx(LINK_STYLE, idx === current && 'bg-grey10')}
+              className={clsx(
+                LINK_STYLE,
+                idx === current && 'bg-grey10',
+                'md:text-base text-sm',
+              )}
               onMouseEnter={() => handleHover(idx)}
               onMouseLeave={() => handleLeave()}
             >
