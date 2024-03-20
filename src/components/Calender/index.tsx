@@ -1,16 +1,16 @@
 'use client'
-import { PropsWithChildren, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
-
-import { DAYS } from '@/constants/days'
 
 interface Props {
   date: string
   dailyDiaries: Record<number, string[]>
 }
 
+const CALENDAR_DATE_STYLE =
+  'flex rounded-full h-10 w-10 justify-center items-center text-sm transition-all border border-white border-opacity-0'
 const CALENDER_HOVER_STYLE = 'hover:bg-lightblue hover:border hover:border-blue'
 
 export default function Calender({ date: current, dailyDiaries }: Props) {
@@ -61,14 +61,23 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
             const date = dayjs(
               `${calendarDate.year()}-${calendarDate.month() + 1}-${idx + 1}`,
             ).format('YYYY-MM-DD')
-            return (
+            const available = dailyDiaries[calendarDate.year()].includes(date)
+
+            return available ? (
               <Link key={idx} href={`/daily/${date}`}>
                 <Date
                   date={idx + 1}
                   active={date === currentDate.format('YYYY-MM-DD')}
-                  available={dailyDiaries[calendarDate.year()].includes(date)}
                 />
               </Link>
+            ) : (
+              <div
+                className={clsx(
+                  `text-grey70 cursor-default ${CALENDAR_DATE_STYLE}`,
+                )}
+              >
+                {idx + 1}
+              </div>
             )
           })}
         </div>
@@ -80,32 +89,18 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
 interface DateProps {
   date: number
   active?: boolean
-  available?: boolean
 }
-function Date({ date, active = false, available = false }: DateProps) {
+function Date({ date, active = false }: DateProps) {
   return (
     <div
       className={clsx(
         active
           ? 'bg-blue text-white'
-          : available
-          ? 'bg-white text-blue font-bold hover:border-blue ' +
-            CALENDER_HOVER_STYLE
-          : 'text-grey70 ' + CALENDER_HOVER_STYLE,
-        'flex rounded-full h-10 w-10 cursor-pointer justify-center items-center text-sm transition-all border border-white border-opacity-0',
+          : `bg-white text-blue font-bold hover:border-blue ${CALENDER_HOVER_STYLE}`,
+        `cursor-pointer ${CALENDAR_DATE_STYLE}`,
       )}
     >
       {date}
-    </div>
-  )
-}
-
-function Days({ children }: PropsWithChildren) {
-  return (
-    <div
-      className={clsx('flex h-10 w-10 justify-center items-center text-base')}
-    >
-      {children}
     </div>
   )
 }
