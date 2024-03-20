@@ -6,6 +6,7 @@ import clsx from 'clsx'
 
 import '@/styles/globals.css'
 import Header from '@/components/Header'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 // dayjs.locale('ko')
 
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(Pretendard.className, 'min-h-screen w-full')}>
+        <GoogleAnalytics gaId="G-N96YSK5HNP" />
         <Header />
         <div className="mx-auto max-w-post py-12 px-7">{children}</div>
       </body>

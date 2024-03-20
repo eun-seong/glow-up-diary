@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^14.1.4",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
     "marked": "^11.1.0",
