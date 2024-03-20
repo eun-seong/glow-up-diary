@@ -50,7 +50,7 @@ async function getCollections() {
           ...res,
           [collectionTitle]: [
             ...(res?.[collectionTitle] || []),
-            { ...metaData, name: fileName, path: filePath },
+            { ...metaData, name: fileName.replace('.md', ''), path: filePath },
           ],
         }
       }, {} as Record<string, CollectionFile[]>)

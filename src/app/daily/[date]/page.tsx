@@ -1,8 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import * as marked from 'marked'
 
-import MetaCard from '@/components/MetaCard'
+import { DailyMetaCard } from '@/components/MetaCard'
 import Post from '@/components/Post'
 
 interface Props {
@@ -25,20 +24,10 @@ export default function Page({ params }: Props) {
     markdownContent = fs.readFileSync(fullPath, 'utf8')
   } catch {}
 
-  function preprocess(markdown: string) {
-    const [first, second = '', ...contents] = markdown.split('---\n')
-    if (!first && second) {
-      return contents.join('---\n')
-    }
-    return markdown
-  }
-
   return (
     <div>
-      <MetaCard markdownContent={markdownContent} />
-      <Post
-        html={marked.use({ hooks: { preprocess } }).parse(markdownContent)}
-      />
+      <DailyMetaCard markdownContent={markdownContent} />
+      <Post html={markdownContent} />
     </div>
   )
 }

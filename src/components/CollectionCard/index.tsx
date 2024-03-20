@@ -25,10 +25,13 @@ export default function CollectionCard({ collectionName, files }: Props) {
         <ol>
           {files.map(({ title, path, date }) => (
             <li key={path}>
-              <Link href={`posts/${path}`} className="no-underline">
+              <Link
+                href={`posts/${path.replace('.md', '')}`}
+                className="no-underline"
+              >
                 <span className="underline">{title}</span>
                 <span className="ml-2 text-xs text-grey80 font-normal">
-                  {date}
+                  {date.replaceAll('-', '.')}
                 </span>
               </Link>
             </li>
