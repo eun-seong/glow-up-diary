@@ -14,7 +14,7 @@ title: 남의위키 의존성 그래프를 그려보기
 심지어 User 도메인은 그리지도 않았는데 말이다...
 
 최대한 보기 좋고 예쁜 그래프를 그리려다가 Dashboard 그릴 때부터 포기했다.
-![[Pasted image 20240307035419.png]]
+![image](Pasted-image-20240307035419.png)
 
 파랑 : Repository
 빨강 : Service
@@ -51,10 +51,10 @@ SurveyAnswer/Answer 와 Survey/Answer의 역할이 동일하여 SurveyAnswer를 
 이에 따라서 SurveyAnswer.Answer도 제거하게 되고, Survey.Answer로 합쳤다.
 
 기존에 이랬던 것이
-![[./images/Pasted image 20240305165101.png]]
+![image](Pasted-image-20240305165101.png)
 
 빨간 박스가 사라져 이렇게 되었다.
-![[./images/Pasted image 20240305165126.png]]
+![image](Pasted-image-20240305165126.png)
 
 ### Statistics와 Statistic을 Dashboard 도메인으로 이동
 
@@ -71,13 +71,13 @@ dashboard에서는 DB에 있는 데이터를 가져와 DTO로 변환하는 로�
 클래스를 이동한 후에, 대시보드에 대한 응집도를 높이기 위해 statistic의 1번을 dashboard에서 처리하도록 수정해야 한다.
 
 유저가 설문을 생성하면, 해당 설문을 저장한 후에 유저 통계를 업데이트한다.
-![[./images/Pasted image 20240305181013.png]]
+![image](Pasted-image-20240305181013.png)
 
 이 `statisticsService`에서 통계를 업데이트하는 메소드에 유저의 통계량과 전체 통계량 업데이트하는 로직이 섞여 있어 복잡해진 것 같다. (이것들은 나중에 event 기반으로 변경할 예정이지만 지금은 의존성 정리를 먼저할 것이다.)
 
 그래서 일단 이 둘을 분리하도록 한다.
 SurveyService에 dashboardService 의존성이 생겼지만, 로직은 분리되었다.
-![[./images/Pasted image 20240305182748.png]]
+![image](Pasted-image-20240305182748.png)
 
 먼저 개발 요구 사항을 다시 리스트업했다.
 
@@ -99,7 +99,7 @@ SurveyService에 dashboardService 의존성이 생겼지만, 로직은 분리되
   - (상속) SadDashboardComponent
 
 이후 다시 그래프 정리를 해보니 아래처럼 정리가 되었다.
-![[./images/Pasted image 20240305191811.png]]
+![image](Pasted-image-20240305191811.png)
 
 깔끔하게 2가지 종류로 나뉘어서 DashboardComponent와 Statistic이 1:1 매칭이 될거라고 예상했었지만, CharacterDashboard 때문에 그렇게 되지 않았다.
 CharacterDashboard 안에 여러 개의 RatioStatistic들이 들어가 있는 셈이다. 이 부분이 변경되면서 DashboardComponent가 기존에 공통으로 questionId를 가지고 있었지만, CharacterDashboard의 데이터 구성이 달라 제외되고 지금은 calculate 추상 메소드 외에는 의미없는 껍데기 클래스가 되어 버렸다.
@@ -115,14 +115,14 @@ CharacterDashboard 안에 여러 개의 RatioStatistic들이 들어가 있는 �
 그래서 대시보드 컴포넌트의 유형을 다시 나누기로 했다.
 
 지금은 대시보드타입"마다" 클래스를 하나씩 가지고 있다. 간단히 보자면 이런 형태였는데,
-![[./images/Pasted image 20240307033500.png]]
+![image](Pasted-image-20240307033500.png)
 
 여기서 BestWorth, Happy, Sad 는 클래스 이름으로만 나누어져 있고 구성 내용 및 로직은 완전히 동일하다.
 즉, 이름만 다른 같은 클래스이다.
 (개발할 당시에 너무 복잡한데 데드라인 때문에 어쩔 수 없이 하나씩 생성하였었다.)
 
 그래서 이를 3가지로 나누는것으로 계획했다.
-![[./images/Pasted image 20240306183343.png]]
+![image](Pasted-image-20240306183343.png)
 
 - BinaryDashboard
   - Character
@@ -144,8 +144,9 @@ CharacterDashboard 안에 여러 개의 RatioStatistic들이 들어가 있는 �
   3.  "구분"은 통계를 산출하는 "방법"에 관한 기준이다.
   4.  그래서 Statistics**Calculation**Type으로 변경하였다.
 - DashboardType -> 유지
-  
+
   프론트에서 렌더링을 구분하기 위한 타입이다. 꼭 필요하고, 수정할 수 없다.
+
 - DashboardStatisticType -> 새로 생성
   Statistic을 Dashboard로 변환할 때 어떤 유형인지 구분하느 타입이다.
   `RATIO`, `AVERAGE`, `BINRAY` 가 존재한다. `StatisticsCalculationType`과 거의 유사하여 합칠까 고민하였지만, 용도가 달라 따로 두었다.
@@ -200,11 +201,10 @@ public List<DashboardComponent> getUserDashboards() {
 ## 리팩토링으로 얻은 것
 
 리팩토링 후의 의존성 그래프는 확실히 간단해졌다.
-![[Pasted image 20240307035403.png]]
+![image](Pasted-image-20240307035403.png)
 
 귀속되는 클래스끼리 묶은 컴팩트 버전은 더 간단하다.
-![[Pasted image 20240307035319.png]]
-
+![image](Pasted-image-20240307035319.png)
 
 이미 존재하는 DashboareStatisticsType으로 새로운 대시보드 타입이 하나가 추가되면
 
@@ -230,4 +230,3 @@ PopulationStatistic도 비슷하다.
 
 우아한 객체지향 세미나를 보고 적용해본 것인데, 그래프를 그려보니 눈에 확 들어와서 체감하기 좋았다.
 이렇게 꼬인 것들을 풀어내고 각자의 역할에 충실한 코드와 아키텍쳐를 유지하려고 노력하하는 것이, 나중에 크기가 커졌을 때 레포를 분리하고 MSA를 적용하기 위한 준비라는 생각이 든다.
-
