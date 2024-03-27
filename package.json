@@ -13,8 +13,10 @@
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
     "highlight.js": "^11.9.0",
+    "katex": "^0.16.10",
     "marked": "^11.1.0",
     "marked-highlight": "^2.1.1",
+    "marked-katex-extension": "^5.0.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"

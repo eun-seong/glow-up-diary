@@ -1,6 +1,7 @@
 import { Marked } from 'marked'
 import { markedHighlight } from 'marked-highlight'
 import hljs from 'highlight.js'
+import markedKatex from 'marked-katex-extension'
 
 interface Props {
   html: string
@@ -15,6 +16,11 @@ export default function Post({ html }: Props) {
         const language = hljs.getLanguage(lang) ? lang : 'plaintext'
         return hljs.highlight(code, { language }).value
       },
+    }),
+    markedKatex({
+      throwOnError: false,
+      displayMode: true,
+      output: 'mathml',
     }),
     {
       renderer: {

@@ -11,6 +11,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 // dayjs.locale('ko')
 
 import 'highlight.js/styles/github-dark.css'
+import Head from 'next/head'
 
 const Pretendard = localFont({
   src: '../assets/fonts/Pretendard/PretendardVariable.woff2',
@@ -29,6 +30,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+          integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn"
+        />
+      </head>
       <body className={clsx(Pretendard.className, 'min-h-screen w-full')}>
         <GoogleAnalytics gaId="G-N96YSK5HNP" />
         <Header />
