@@ -10,6 +10,8 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 
 // dayjs.locale('ko')
 
+import 'highlight.js/styles/github-dark.css'
+
 const Pretendard = localFont({
   src: '../assets/fonts/Pretendard/PretendardVariable.woff2',
   display: 'swap',
