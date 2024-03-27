@@ -72,6 +72,7 @@ export default function Calender({ date: current, dailyDiaries }: Props) {
               </Link>
             ) : (
               <div
+                key={idx}
                 className={clsx(
                   `text-grey70 cursor-default ${CALENDAR_DATE_STYLE}`,
                 )}
